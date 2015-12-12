@@ -1,0 +1,29 @@
+Theme : Two Buttons /& Growing
+
+Title : Sticky Stuff
+
+Two buttons (+ arrow keys?)
+- Left Button turns left
+- Right Button turns right
+
+Two phases (each level):
+
+ Phase1
+  - Collectable objects are being sent from top, left, right
+  - Powerups? What kind?
+  - Player can turn the character
+  - Objects grow that part of the character that collides with the collectable objects
+
+ Phase2
+  - Negative objects are being sent from top, left, right
+  - Player can turn the character
+  - Player can take a few hits?
+  - The parts that take hits shrink?
+
+ End
+  - Score is calculated on finish, more parts = more score
+  - Size is kept between levels? And game zooms out?
+
+UI
+- Some acceleration to buttons (takes time to start, stop)
+- Show some sort of "band" that shows current rotation speed (near the character)
