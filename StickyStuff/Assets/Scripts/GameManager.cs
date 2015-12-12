@@ -14,12 +14,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private RotationButton rotationButtonRight;
 
-    [SerializeField]
-    private SoundPlayer soundPlayer;
-    [SerializeField]
-    private MusicPlayer musicPlayer;
+    public SoundPlayer soundPlayer;
+    public MusicPlayer musicPlayer;
 
-    [SerializeField]
     private GameObject nextLevelBlob;
 
     [SerializeField]
@@ -31,6 +28,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private GameObject character;
 
+    [SerializeField]
+    private GameObject GameContainer;
+
     private Level nextLevel;
 
     void Awake()
@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
             musicPlayer.StartPlaying();
+            currentLevel = Instantiate(currentLevel);
+            currentLevel.transform.parent = GameContainer.transform;
+            currentLevel.transform.localPosition = Vector3.zero;
+            nextLevel = currentLevel.GetNextLevel();
         }
         else if (instance != this)
         {
@@ -51,37 +55,21 @@ public class GameManager : MonoBehaviour {
         return this.character;
     }
 
-    void Start()
-    {
-        nextLevel = currentLevel.GetNextLevel();
-    }
-
     public void OpenNextLevel()
     {
-        Debug.Log("Yes! Next level!");
-        Debug.Log(currentLevel);
-        Debug.Log(nextLevel);
-        currentLevel.gameObject.SetActive(false);
+        currentLevel.Kill();
         if (nextLevel == null)
         {
             // UI show stuff heer
             Debug.Log("The End");
         }
         else {
-            currentLevel = nextLevel;
             character.GetComponent<CharacterMovement>().EmptySticky();
-            currentLevel.gameObject.SetActive(true);
+            currentLevel = Instantiate(nextLevel);
+            currentLevel.transform.parent = GameContainer.transform;
+            currentLevel.transform.localPosition = Vector3.zero;
             nextLevel = currentLevel.GetNextLevel();
         }
-    }
-
-    public void PlaySound(SoundType soundType){
-        soundPlayer.PlaySound(soundType);
-    }
-
-    public void PlayLeveledSound(SoundType soundType, int soundLevel)
-    {
-        soundPlayer.PlayLeveledSound(soundType, soundLevel);
     }
 
     public void UpdateSpeedBand(float speed)

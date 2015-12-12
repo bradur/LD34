@@ -41,7 +41,7 @@ public class NextLevelBlobParent : MonoBehaviour {
             {
                 transform.position = targetPosition;
                 moving = false;
-                GameManager.instance.PlaySound(SoundType.Finish);
+                GameManager.instance.soundPlayer.PlaySound(SoundType.Finish);
                 animator.SetTrigger("BounceCenter");
             }
             newPosition = Vector3.Lerp(

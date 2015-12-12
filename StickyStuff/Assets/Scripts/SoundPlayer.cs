@@ -23,6 +23,8 @@ public class SoundPlayer : MonoBehaviour {
     public List<AudioSource> objectComesIntoViewSounds = new List<AudioSource>();
     public List<AudioSource> collisionSounds = new List<AudioSource>();
 
+    private AudioSource loopedSound;
+
     [SerializeField]
     private bool mute = false;
     private List<AudioSource> soundList = new List<AudioSource>();
@@ -35,6 +37,14 @@ public class SoundPlayer : MonoBehaviour {
     public void PlayLeveledSound(SoundType soundType, int soundLevel)
     {
         Play(soundType, soundLevel);
+    }
+
+    public void StopLoopedSound()
+    {
+        if (loopedSound.isPlaying)
+        {
+            loopedSound.Stop();
+        }
     }
 
     private void Play(SoundType soundType, int soundLevel = -1)
@@ -64,9 +74,10 @@ public class SoundPlayer : MonoBehaviour {
 
             if (soundList.Count > 0)
             {
+                int soundIndex = 0;
                 if (soundLevel == -1)
                 {
-                    soundList[Random.Range(0, soundList.Count)].Play();
+                    soundIndex = Random.Range(0, soundList.Count);
                 }
                 else
                 {
@@ -74,7 +85,28 @@ public class SoundPlayer : MonoBehaviour {
                     {
                         soundLevel = soundList.Count - 1;
                     }
-                    soundList[soundLevel].Play();
+                    soundIndex = soundLevel;
+                }
+                if (soundList[soundIndex].loop)
+                {
+                    if (loopedSound != null)
+                    {
+                        if (!loopedSound.isPlaying)
+                        {
+                            loopedSound = soundList[soundIndex];
+                            soundList[soundIndex].Play();
+                        }
+                    }
+                    else
+                    {
+                        loopedSound = soundList[soundIndex];
+                        soundList[soundIndex].Play();
+                    }
+
+                }
+                else
+                {
+                    soundList[soundIndex].Play();
                 }
             }
             else

@@ -23,4 +23,8 @@ public class Level : MonoBehaviour {
         return this.nextLevel;
     }
 
+    public void Kill()
+    {
+        Destroy(gameObject);
+    }
 }

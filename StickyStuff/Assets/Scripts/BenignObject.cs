@@ -15,7 +15,6 @@ public class BenignObject : MonoBehaviour {
     [SerializeField]
     private Rigidbody2D rigidBody;
 
-    [SerializeField]
     private Transform target;
 
     private bool attached = false;
@@ -23,9 +22,9 @@ public class BenignObject : MonoBehaviour {
     [HideInInspector]
     public int objectLevel = 0;
 
-    public void Init(Transform target)
+    void Start()
     {
-        this.target = target;
+        target = GameManager.instance.GetCharacter().transform;
     }
 
     void Update () {
@@ -41,7 +40,7 @@ public class BenignObject : MonoBehaviour {
             {
                 objectLevel = collision.gameObject.GetComponent<BenignObject>().objectLevel + 1;
             }
-            GameManager.instance.PlayLeveledSound(SoundType.Collision, objectLevel);
+            GameManager.instance.soundPlayer.PlayLeveledSound(SoundType.Collision, objectLevel);
             CharacterMovement character = GameManager.instance.GetCharacter().GetComponent<CharacterMovement>();
             if (transform.parent.childCount == 1)
             {

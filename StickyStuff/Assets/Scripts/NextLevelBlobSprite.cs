@@ -20,7 +20,7 @@ public class NextLevelBlobSprite : MonoBehaviour {
             {
                 soundLevel = collision.gameObject.GetComponent<BenignObject>().objectLevel + 1;
             }
-            GameManager.instance.PlayLeveledSound(SoundType.Collision, soundLevel);
+            GameManager.instance.soundPlayer.PlayLeveledSound(SoundType.Collision, soundLevel);
             animator.SetTrigger("EnterCenter");
             hasCollided = true;
         }

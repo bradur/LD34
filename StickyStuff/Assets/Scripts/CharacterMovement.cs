@@ -38,6 +38,7 @@ public class CharacterMovement : MonoBehaviour {
             leftButtonDown = false;
             rightButtonDown = true;
         }
+        GameManager.instance.soundPlayer.PlaySound(SoundType.Turn);
     }
 
     public Transform GetStickyContainer()
@@ -62,6 +63,7 @@ public class CharacterMovement : MonoBehaviour {
         {
             rightButtonDown = false;
         }
+        GameManager.instance.soundPlayer.StopLoopedSound();
     }
 
     void Update () {
