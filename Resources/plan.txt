@@ -20,11 +20,15 @@ UI
 
 TODO:
 - better collision sounds
-- more shapes
-- level progression + score
+- more shapes DONE
+- level progression + score WORK
 - retry-button
 - more sounds:
     * next level blob
     * come into view
     * button
     * turn
+- Music:
+    - strings (+ turn sound)
+    - drums or no?
+    - stronger chords plz

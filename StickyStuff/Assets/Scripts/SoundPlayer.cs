@@ -29,7 +29,18 @@ public class SoundPlayer : MonoBehaviour {
 
     public void PlaySound(SoundType soundType)
     {
-        if (!mute) { 
+        Play(soundType);
+    }
+
+    public void PlayLeveledSound(SoundType soundType, int soundLevel)
+    {
+        Play(soundType, soundLevel);
+    }
+
+    private void Play(SoundType soundType, int soundLevel = -1)
+    {
+        if (!mute)
+        {
             if (soundType == SoundType.Button)
             {
                 soundList = buttonSounds;
@@ -53,7 +64,18 @@ public class SoundPlayer : MonoBehaviour {
 
             if (soundList.Count > 0)
             {
-                soundList[Random.Range(0, soundList.Count)].Play();
+                if (soundLevel == -1)
+                {
+                    soundList[Random.Range(0, soundList.Count)].Play();
+                }
+                else
+                {
+                    if (soundLevel >= soundList.Count)
+                    {
+                        soundLevel = soundList.Count - 1;
+                    }
+                    soundList[soundLevel].Play();
+                }
             }
             else
             {
@@ -61,4 +83,5 @@ public class SoundPlayer : MonoBehaviour {
             }
         }
     }
+
 }

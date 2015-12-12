@@ -20,6 +20,9 @@ public class BenignObject : MonoBehaviour {
 
     private bool attached = false;
 
+    [HideInInspector]
+    public int objectLevel = 0;
+
     public void Init(Transform target)
     {
         this.target = target;
@@ -34,12 +37,17 @@ public class BenignObject : MonoBehaviour {
         if (!attached && collision.gameObject.tag == "Player")
         {
             attached = true;
-            GameManager.instance.PlaySound(SoundType.Collision);
+            if (collision.gameObject.GetComponent<BenignObject>() != null)
+            {
+                objectLevel = collision.gameObject.GetComponent<BenignObject>().objectLevel + 1;
+            }
+            GameManager.instance.PlayLeveledSound(SoundType.Collision, objectLevel);
+            CharacterMovement character = GameManager.instance.GetCharacter().GetComponent<CharacterMovement>();
             if (transform.parent.childCount == 1)
             {
                 GameManager.instance.SpawnNextLevelBlob();
             }
-            transform.parent = collision.gameObject.transform;
+            transform.parent = character.GetStickyContainer();
             rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;
             gameObject.tag = "Player";
         }

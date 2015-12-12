@@ -25,6 +25,14 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private SpeedBand speedBand;
 
+    [SerializeField]
+    private Level currentLevel;
+
+    [SerializeField]
+    private GameObject character;
+
+    private Level nextLevel;
+
     void Awake()
     {
         if (instance == null)
@@ -39,14 +47,41 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+    public GameObject GetCharacter(){
+        return this.character;
+    }
 
     void Start()
     {
+        nextLevel = currentLevel.GetNextLevel();
+    }
 
+    public void OpenNextLevel()
+    {
+        Debug.Log("Yes! Next level!");
+        Debug.Log(currentLevel);
+        Debug.Log(nextLevel);
+        currentLevel.gameObject.SetActive(false);
+        if (nextLevel == null)
+        {
+            // UI show stuff heer
+            Debug.Log("The End");
+        }
+        else {
+            currentLevel = nextLevel;
+            character.GetComponent<CharacterMovement>().EmptySticky();
+            currentLevel.gameObject.SetActive(true);
+            nextLevel = currentLevel.GetNextLevel();
+        }
     }
 
     public void PlaySound(SoundType soundType){
         soundPlayer.PlaySound(soundType);
+    }
+
+    public void PlayLeveledSound(SoundType soundType, int soundLevel)
+    {
+        soundPlayer.PlayLeveledSound(soundType, soundLevel);
     }
 
     public void UpdateSpeedBand(float speed)
@@ -66,13 +101,9 @@ public class GameManager : MonoBehaviour {
 
     public void SpawnNextLevelBlob()
     {
-        nextLevelBlob.SetActive(true);
+        currentLevel.GetNextLevelBlob().gameObject.SetActive(true);
     }
 
-    public void OpenNextLevel()
-    {
-        nextLevelBlob.SetActive(true);
-    }
 
     void Update () {
         if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.RightArrow))

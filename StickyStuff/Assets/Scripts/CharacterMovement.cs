@@ -20,6 +20,9 @@ public class CharacterMovement : MonoBehaviour {
     [SerializeField]
     private ForceMode forceMode;
 
+    [SerializeField]
+    private Transform stickyContainer;
+
     private bool leftButtonDown = false;
     private bool rightButtonDown = false;
 
@@ -34,6 +37,19 @@ public class CharacterMovement : MonoBehaviour {
         {
             leftButtonDown = false;
             rightButtonDown = true;
+        }
+    }
+
+    public Transform GetStickyContainer()
+    {
+        return stickyContainer;
+    }
+
+    public void EmptySticky()
+    {
+        foreach (Transform child in stickyContainer)
+        {
+            Destroy(child.gameObject);
         }
     }
 
