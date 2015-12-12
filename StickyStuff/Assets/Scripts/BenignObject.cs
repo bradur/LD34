@@ -34,6 +34,7 @@ public class BenignObject : MonoBehaviour {
         if (!attached && collision.gameObject.tag == "Player")
         {
             attached = true;
+            GameManager.instance.PlaySound(SoundType.Collision);
             if (transform.parent.childCount == 1)
             {
                 GameManager.instance.SpawnNextLevelBlob();

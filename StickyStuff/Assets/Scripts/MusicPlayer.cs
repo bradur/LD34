@@ -8,20 +8,31 @@ using System.Collections;
 public class MusicPlayer : MonoBehaviour {
     [SerializeField]
     private AudioSource themeSong;
+    [SerializeField]
+    private bool mute = false;
 
     public void StartPlaying()
     {
-        if (!themeSong.isPlaying) { 
-            themeSong.Play();
+        if (!themeSong.isPlaying) {
+            if (!mute)
+            {
+                themeSong.Play();
+            }
         }
         else
         {
-            themeSong.UnPause();
+            if (!mute)
+            {
+                themeSong.UnPause();
+            }
         }
     }
 
     public void Pause()
     {
-        themeSong.Pause();
+        if (!themeSong.isPlaying)
+        {
+            themeSong.Pause();
+        }
     }
 }

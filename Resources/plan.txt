@@ -17,3 +17,14 @@ Game:
 UI
 - Some acceleration to buttons (takes time to start, stop)
 - Show some sort of "band" that shows current rotation speed (near the character)
+
+TODO:
+- better collision sounds
+- more shapes
+- level progression + score
+- retry-button
+- more sounds:
+    * next level blob
+    * come into view
+    * button
+    * turn

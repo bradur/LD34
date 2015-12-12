@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
+            musicPlayer.StartPlaying();
         }
         else if (instance != this)
         {
@@ -42,6 +43,10 @@ public class GameManager : MonoBehaviour {
     void Start()
     {
 
+    }
+
+    public void PlaySound(SoundType soundType){
+        soundPlayer.PlaySound(soundType);
     }
 
     public void UpdateSpeedBand(float speed)

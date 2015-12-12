@@ -23,38 +23,42 @@ public class SoundPlayer : MonoBehaviour {
     public List<AudioSource> objectComesIntoViewSounds = new List<AudioSource>();
     public List<AudioSource> collisionSounds = new List<AudioSource>();
 
+    [SerializeField]
+    private bool mute = false;
     private List<AudioSource> soundList = new List<AudioSource>();
 
     public void PlaySound(SoundType soundType)
     {
-        if (soundType == SoundType.Button)
-        {
-            soundList = buttonSounds;
-        }
-        else if (soundType == SoundType.Turn)
-        {
-            soundList = turnSounds;
-        }
-        else if (soundType == SoundType.Finish)
-        {
-            soundList = finishSounds;
-        }
-        else if (soundType == SoundType.ObjectComesIntoView)
-        {
-            soundList = objectComesIntoViewSounds;
-        }
-        else if (soundType == SoundType.Collision)
-        {
-            soundList = collisionSounds;
-        }
+        if (!mute) { 
+            if (soundType == SoundType.Button)
+            {
+                soundList = buttonSounds;
+            }
+            else if (soundType == SoundType.Turn)
+            {
+                soundList = turnSounds;
+            }
+            else if (soundType == SoundType.Finish)
+            {
+                soundList = finishSounds;
+            }
+            else if (soundType == SoundType.ObjectComesIntoView)
+            {
+                soundList = objectComesIntoViewSounds;
+            }
+            else if (soundType == SoundType.Collision)
+            {
+                soundList = collisionSounds;
+            }
 
-        if (soundList.Count > 0)
-        {
-            soundList[Random.Range(0, soundList.Count)].Play();
-        }
-        else
-        {
-            Debug.Log("ERROR: Empty sound list!");
+            if (soundList.Count > 0)
+            {
+                soundList[Random.Range(0, soundList.Count)].Play();
+            }
+            else
+            {
+                Debug.Log("ERROR: Empty sound list!");
+            }
         }
     }
 }
