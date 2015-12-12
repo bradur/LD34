@@ -6,23 +6,13 @@ Two buttons (+ arrow keys?)
 - Left Button turns left
 - Right Button turns right
 
-Two phases (each level):
-
- Phase1
-  - Collectable objects are being sent from top, left, right
-  - Powerups? What kind?
-  - Player can turn the character
-  - Objects grow that part of the character that collides with the collectable objects
-
- Phase2
-  - Negative objects are being sent from top, left, right
-  - Player can turn the character
-  - Player can take a few hits?
-  - The parts that take hits shrink?
-
- End
-  - Score is calculated on finish, more parts = more score
-  - Size is kept between levels? And game zooms out?
+Game:
+  - Collectable objects fall towards the player
+  - Player can turn around but not move
+  - Objects become a part of the character on collision
+  - The object is to become big enough to reach next level
+    (gauge this somehow)
+  - Game zooms out when going to next level
 
 UI
 - Some acceleration to buttons (takes time to start, stop)

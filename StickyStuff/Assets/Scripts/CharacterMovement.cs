@@ -49,27 +49,7 @@ public class CharacterMovement : MonoBehaviour {
     }
 
     void Update () {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            ButtonUp("left");
-            ButtonUp("right");
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            ButtonDown("left");
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            ButtonDown("right");
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            ButtonUp("left");
-        }
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            ButtonUp("right");
-        }
+        float angularVelocity = Mathf.Abs(rigidBody.angularVelocity.z);
         if (leftButtonDown)
         {
             rigidBody.AddRelativeTorque(new Vector3(0f, 0f, speed), forceMode);
@@ -78,10 +58,10 @@ public class CharacterMovement : MonoBehaviour {
         {
             rigidBody.AddRelativeTorque(new Vector3(0f, 0f, -speed), forceMode);
         }
-        else if (Mathf.Abs(rigidBody.angularVelocity.z) <= minimumVelocity)
-        {
+        else if (angularVelocity <= minimumVelocity){
             rigidBody.angularVelocity = Vector3.zero;
         }
+        GameManager.instance.UpdateSpeedBand(angularVelocity);
         //Debug.Log("[RIGHT: " + (rightButtonDown ? "<color=green>ON</color>" : "<color=red>OFF</color>") + "] [LEFT: " + (leftButtonDown ? "<color=green>ON</color>" : "<color=red>OFF</color>") + "] [VEL: " + rigidBody.angularVelocity.z + "]");
     }
 }
