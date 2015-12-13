@@ -27,6 +27,7 @@ public class NextLevelBlobParent : MonoBehaviour {
 
     public void OpenNextLevel()
     {
+        transform.parent = GameManager.instance.GetCharacter().GetComponent<CharacterMovement>().GetStickyContainer();
         GameManager.instance.OpenNextLevel();
     }
 

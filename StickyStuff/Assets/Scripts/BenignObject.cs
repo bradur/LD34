@@ -22,6 +22,7 @@ public class BenignObject : MonoBehaviour {
     [HideInInspector]
     public int objectLevel = 0;
 
+    private int objectLevelInterval = 100;
     private bool appearing = false;
     private Vector3 targetScale = new Vector3(1f, 1f, 1f);
     private float speed = 1f;
@@ -75,12 +76,17 @@ public class BenignObject : MonoBehaviour {
     {
         if (!attached && collision.gameObject.tag == "Player")
         {
+            float characterSpeed = GameManager.instance.GetCharacter().GetComponent<Rigidbody>().angularVelocity.z;
+            characterSpeed = Mathf.Abs(Mathf.Round(characterSpeed * 1000.0000f) / 1000.0000f);
             attached = true;
             if (collision.gameObject.GetComponent<BenignObject>() != null)
             {
-                objectLevel = collision.gameObject.GetComponent<BenignObject>().objectLevel + 1;
+                objectLevel = collision.gameObject.GetComponent<BenignObject>().objectLevel;
             }
-            GameManager.instance.popupManager.ShowPopup((objectLevel + 1) + "", transform.position);
+            int objectLevelDisplay = (objectLevel + 1) * objectLevelInterval;
+            int score = objectLevelDisplay + Mathf.FloorToInt(characterSpeed * (float)(objectLevelDisplay));
+            GameManager.instance.popupManager.ShowPopup(objectLevelDisplay + "+" + objectLevelDisplay + " <size=50>x</size> " + characterSpeed + " = " + score, transform.position);
+            GameManager.instance.UpdateScore(score);
             GameManager.instance.soundPlayer.PlayLeveledSound(SoundType.Collision, objectLevel);
             CharacterMovement character = GameManager.instance.GetCharacter().GetComponent<CharacterMovement>();
             if (transform.parent.childCount == 1)

@@ -7,6 +7,8 @@ using System.Collections;
 
 public class Level : MonoBehaviour {
 
+    public int id = 0;
+
     [SerializeField]
     private NextLevelBlobParent nextLevelBlob;
 

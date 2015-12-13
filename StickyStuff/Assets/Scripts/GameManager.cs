@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private bool TESTING = false;
 
+    [SerializeField]
+    private ScoreDisplay scoreDisplay;
+
     void Awake()
     {
         if (instance == null)
@@ -61,6 +64,11 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
+    public void UpdateScore(int score)
+    {
+        scoreDisplay.AddToScore(score);
+    }
+
     public GameObject GetCharacter(){
         return this.character;
     }
@@ -68,7 +76,16 @@ public class GameManager : MonoBehaviour {
     public void NextLevelBlobFound()
     {
         StopAllCoroutines();
+        int record = PlayerPrefs.GetInt("HighScore_" + currentLevel.id);
+        int newScore = scoreDisplay.GetScore();
+        if(newScore > record){
+            PlayerPrefs.SetInt("HighScore_" + currentLevel.id, newScore);
+            PlayerPrefs.Save();
+            scoreDisplay.SetRecord(newScore);
+        }
+
         popupManager.ClearPool();
+        popupManager.ShowPopup("New High Score! " + newScore, Vector3.zero, PopupType.Lingering);
     }
 
     public void OpenNextLevel()
@@ -86,6 +103,9 @@ public class GameManager : MonoBehaviour {
 
     private void OpenLevel(Level level){
         StopAllCoroutines();
+        scoreDisplay.ResetScore();
+        int record = PlayerPrefs.GetInt("HighScore_" + level.id);
+        scoreDisplay.SetRecord(record);
         character.GetComponent<CharacterMovement>().EmptySticky();
         currentLevelPrefab = level;
         currentLevel = Instantiate(level);

@@ -23,15 +23,21 @@ TODO:
 - more shapes                   DONE
 - level progression             DONE
 - UI notifications              DONE
-- score                         ?
+- score                         DONE
 - retry key                     DONE
 - more levels                   WORKING
 - enemy & levels with enemies   ?
 - more sounds:
-    * next level blob           WORKING
     * speak                     DONE
     * turn                      DONE
+    * WOOSH (level transition)  WORKING
 - Music:
-    - strings (+ turn sound)
-    - drums or no?
-    - stronger chords plz
+    - strings (+ turn sound)    DONE
+    - drums                     ?
+    - stronger chords plz       DONE
+    - 3rd verse                 ?
+- Polish:
+    - next level blob ordering  DONE
+    - nlb visible in transition DONE
+    - make early levels easier  DONE
+    - animations
