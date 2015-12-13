@@ -41,9 +41,11 @@ public class SoundPlayer : MonoBehaviour {
 
     public void StopLoopedSound()
     {
-        if (loopedSound.isPlaying)
-        {
-            loopedSound.Stop();
+        if (!mute) { 
+            if (loopedSound.isPlaying)
+            {
+                loopedSound.Stop();
+            }
         }
     }
 

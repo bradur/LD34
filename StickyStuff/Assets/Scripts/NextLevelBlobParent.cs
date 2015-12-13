@@ -22,6 +22,9 @@ public class NextLevelBlobParent : MonoBehaviour {
 
     private Vector3 newPosition;
 
+    [SerializeField]
+    private NextLevelBlobSprite nextLevelBlobSprite;
+
     public void OpenNextLevel()
     {
         GameManager.instance.OpenNextLevel();
@@ -33,11 +36,21 @@ public class NextLevelBlobParent : MonoBehaviour {
         targetPosition = GameManager.instance.GetCharacter().transform.position;
     }
 
+    public void PlayAppearingSound()
+    {
+        GameManager.instance.soundPlayer.PlaySound(SoundType.ObjectComesIntoView);
+    }
+
+    public void SaySomething()
+    {
+        nextLevelBlobSprite.SaySomething();
+    }
+
     void Update()
     {
         if(moving){
 
-            if ((transform.position.x - targetPosition.x) < 0.1f && (transform.position.y - targetPosition.y) < 0.1f)
+            if (Mathf.Abs(transform.position.x - targetPosition.x) < 0.1f && Mathf.Abs(transform.position.y - targetPosition.y) < 0.1f)
             {
                 transform.position = targetPosition;
                 moving = false;

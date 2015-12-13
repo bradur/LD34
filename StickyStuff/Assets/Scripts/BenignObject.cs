@@ -40,11 +40,13 @@ public class BenignObject : MonoBehaviour {
             {
                 objectLevel = collision.gameObject.GetComponent<BenignObject>().objectLevel + 1;
             }
+            GameManager.instance.popupManager.ShowPopup((objectLevel + 1) + "", transform.position);
             GameManager.instance.soundPlayer.PlayLeveledSound(SoundType.Collision, objectLevel);
             CharacterMovement character = GameManager.instance.GetCharacter().GetComponent<CharacterMovement>();
             if (transform.parent.childCount == 1)
             {
-                GameManager.instance.SpawnNextLevelBlob();
+                //GameManager.instance.SpawnNextLevelBlob();
+                GameManager.instance.WaitForFinish();
             }
             transform.parent = character.GetStickyContainer();
             rigidBody.constraints = RigidbodyConstraints2D.FreezePosition;

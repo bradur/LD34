@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.01, y: 4.49, z: 10}
+  m_LocalPosition: {x: -2.104, y: 2.332, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,26 +62,26 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: 0.5879917, y: -0.24572694}
+    - - {x: 0.54105926, y: -0.23090601}
       - {x: 0.33068562, y: 0.042520955}
       - {x: 0.4709835, y: 0.103760436}
       - {x: 0.37171078, y: 0.36200836}
       - {x: 0.045047283, y: 0.2107321}
       - {x: 0.2227354, y: 0.5169665}
-      - {x: -0.07098293, y: 0.6455127}
-      - {x: -0.09448719, y: 0.56747913}
-      - {x: -0.22397423, y: 0.3344874}
-      - {x: -0.36499977, y: 0.19871859}
-      - {x: -0.66499996, y: 0.037479125}
-      - {x: -0.5744872, y: -0.22747901}
+      - {x: -0.041341305, y: 0.6010504}
+      - {x: -0.06484556, y: 0.5403075}
+      - {x: -0.16222095, y: 0.3196664}
+      - {x: -0.33535814, y: 0.15919638}
+      - {x: -0.6254778, y: 0.027598381}
+      - {x: -0.5547261, y: -0.20524788}
       - {x: -0.24914742, y: -0.06513071}
       - {x: -0.4227352, y: -0.38572702}
       - {x: -0.1385045, y: -0.5034622}
       - {x: -0.090256214, y: -0.39017263}
-      - {x: 0.09769344, y: -0.64901674}
-      - {x: 0.18572712, y: -0.5169666}
-      - {x: 0.3244872, y: -0.37696648}
-      - {x: 0.46594143, y: -0.27923116}
+      - {x: 0.11004424, y: -0.6094949}
+      - {x: 0.17337656, y: -0.47744465}
+      - {x: 0.2997861, y: -0.3349743}
+      - {x: 0.4486506, y: -0.25452995}
 --- !u!114 &11473548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,9 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccd1edf2e0b0c54ca0e6033181433d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 3.09
+  acceleration: 5.2
   rigidBody: {fileID: 5076966}
-  target: {fileID: 0}
+  objectLevel: 0
 --- !u!212 &21265166
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -132,7 +132,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: acceleration
+      value: 1.52
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 190322}

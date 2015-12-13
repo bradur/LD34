@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 
     public SoundPlayer soundPlayer;
     public MusicPlayer musicPlayer;
+    public PopupManager popupManager;
 
     private GameObject nextLevelBlob;
 
@@ -28,10 +29,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private GameObject character;
 
+    private Level currentLevelPrefab;
+
     [SerializeField]
     private GameObject GameContainer;
 
     private Level nextLevel;
+
+    [SerializeField]
+    private bool TESTING = false;
 
     void Awake()
     {
@@ -39,10 +45,15 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
             musicPlayer.StartPlaying();
-            currentLevel = Instantiate(currentLevel);
-            currentLevel.transform.parent = GameContainer.transform;
-            currentLevel.transform.localPosition = Vector3.zero;
-            nextLevel = currentLevel.GetNextLevel();
+            if (!TESTING)
+            {
+                currentLevelPrefab = currentLevel;
+                currentLevel = Instantiate(currentLevel);
+                currentLevel.transform.parent = GameContainer.transform;
+                currentLevel.transform.localPosition = Vector3.zero;
+                nextLevel = currentLevel.GetNextLevel();
+            }
+            
         }
         else if (instance != this)
         {
@@ -55,6 +66,12 @@ public class GameManager : MonoBehaviour {
         return this.character;
     }
 
+    public void NextLevelBlobFound()
+    {
+        StopAllCoroutines();
+        popupManager.ClearPool();
+    }
+
     public void OpenNextLevel()
     {
         currentLevel.Kill();
@@ -64,12 +81,28 @@ public class GameManager : MonoBehaviour {
             Debug.Log("The End");
         }
         else {
+            StopAllCoroutines();
             character.GetComponent<CharacterMovement>().EmptySticky();
+            currentLevelPrefab = nextLevel;
             currentLevel = Instantiate(nextLevel);
             currentLevel.transform.parent = GameContainer.transform;
             currentLevel.transform.localPosition = Vector3.zero;
+            
             nextLevel = currentLevel.GetNextLevel();
         }
+    }
+
+    public void RestartLevel()
+    {
+        StopCoroutine("WaitOrRetry");
+        popupManager.ClearPool();
+        currentLevel.Kill();
+        currentLevel = Instantiate(currentLevelPrefab);
+        character.GetComponent<CharacterMovement>().EmptySticky();
+        currentLevel.transform.parent = GameContainer.transform;
+        currentLevel.transform.localPosition = Vector3.zero;
+        
+        nextLevel = currentLevel.GetNextLevel();
     }
 
     public void UpdateSpeedBand(float speed)
@@ -92,6 +125,16 @@ public class GameManager : MonoBehaviour {
         currentLevel.GetNextLevelBlob().gameObject.SetActive(true);
     }
 
+    public void WaitForFinish()
+    {
+        StartCoroutine(WaitOrRetry());
+    }
+
+    IEnumerator WaitOrRetry()
+    {
+        yield return new WaitForSeconds(5);
+        popupManager.ShowPopup("Retry? Press R", Vector3.zero, PopupType.Stationary);
+    }
 
     void Update () {
         if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.RightArrow))
@@ -114,6 +157,10 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             ButtonUp(rotationButtonRight);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartLevel();
         }
     }
 }

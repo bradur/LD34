@@ -19,10 +19,14 @@ UI
 - Show some sort of "band" that shows current rotation speed (near the character)
 
 TODO:
-- better collision sounds
-- more shapes DONE
-- level progression + score WORK
-- retry-button
+- better collision sounds       WORKING
+- more shapes                   DONE
+- level progression             DONE
+- UI notifications              DONE
+- score                         ?
+- retry key                     DONE
+- more levels                   WORKING
+- enemy & levels with enemies   ?
 - more sounds:
     * next level blob
     * come into view
