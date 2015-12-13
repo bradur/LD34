@@ -125,7 +125,7 @@ public class SoundPlayer : MonoBehaviour {
             }
             else
             {
-                Debug.Log("ERROR: Empty sound list!");
+                Debug.Log("ERROR: Empty sound list!" + soundList);
             }
         }
     }
