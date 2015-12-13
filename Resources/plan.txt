@@ -30,7 +30,7 @@ TODO:
 - more sounds:
     * speak                     DONE
     * turn                      DONE
-    * WOOSH (level transition)  WORKING
+    * WOOSH (level transition)  DONE
 - Music:
     - strings (+ turn sound)    DONE
     - drums                     ?
@@ -41,3 +41,4 @@ TODO:
     - nlb visible in transition DONE
     - make early levels easier  DONE
     - animations
+- Proper ending!                ?
