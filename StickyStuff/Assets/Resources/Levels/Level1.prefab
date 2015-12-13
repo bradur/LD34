@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevelBlob: {fileID: 11465688}
-  nextLevel: {fileID: 11402808, guid: 94f0fa2ece836e04fbf293f05a4d6c00, type: 2}
+  nextLevel: {fileID: 11405028, guid: 94f0fa2ece836e04fbf293f05a4d6c00, type: 2}
 --- !u!114 &11453266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -748,7 +748,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: nextLevel
       value: 
-      objectReference: {fileID: 11402808, guid: 94f0fa2ece836e04fbf293f05a4d6c00,
+      objectReference: {fileID: 11405028, guid: 94f0fa2ece836e04fbf293f05a4d6c00,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

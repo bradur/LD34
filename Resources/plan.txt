@@ -19,7 +19,7 @@ UI
 - Show some sort of "band" that shows current rotation speed (near the character)
 
 TODO:
-- better collision sounds       WORKING
+- better collision sounds       DONE
 - more shapes                   DONE
 - level progression             DONE
 - UI notifications              DONE
@@ -28,10 +28,9 @@ TODO:
 - more levels                   WORKING
 - enemy & levels with enemies   ?
 - more sounds:
-    * next level blob
-    * come into view
-    * button
-    * turn
+    * next level blob           WORKING
+    * speak                     DONE
+    * turn                      DONE
 - Music:
     - strings (+ turn sound)
     - drums or no?

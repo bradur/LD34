@@ -22,13 +22,53 @@ public class BenignObject : MonoBehaviour {
     [HideInInspector]
     public int objectLevel = 0;
 
+    private bool appearing = false;
+    private Vector3 targetScale = new Vector3(1f, 1f, 1f);
+    private float speed = 1f;
+    private float factor = 4f;
+    private float timerBeforeAppearing = 0.5f;
+
+
     void Start()
     {
         target = GameManager.instance.GetCharacter().transform;
+        transform.localScale = Vector3.zero;
+    }
+
+    void OnBecameVisible(){
+        appearing = true;
+        timerBeforeAppearing = Random.Range(0f, 1f);
     }
 
     void Update () {
-        rigidBody.AddForce((target.position - transform.position).normalized * acceleration);
+        if (appearing)
+        {
+            if (timerBeforeAppearing <= 0) { 
+                transform.localScale = Vector3.Lerp(
+                    transform.localScale,
+                    targetScale,
+                    speed * factor * Time.deltaTime
+                );
+                if ((transform.localScale - targetScale).magnitude < 0.1f)
+                {
+                    appearing = false;
+                    GameManager.instance.soundPlayer.PlaySound(SoundType.Blop);
+                }
+            }
+            else
+            {
+                timerBeforeAppearing -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            rigidBody.AddForce((target.position - transform.position).normalized * acceleration);
+        }
+    }
+
+    public void Kill()
+    {
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

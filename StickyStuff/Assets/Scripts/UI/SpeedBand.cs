@@ -30,7 +30,14 @@ public class SpeedBand : MonoBehaviour {
     {
         varyingSize.x = speed / maxSpeed * 100f;
         rtRectMask.sizeDelta = varyingSize;
-        txtComponent.text = (Mathf.Round(speed * 1000.0000f) / 1000.0000f) + "";
+        if (speed > 0)
+        {
+            txtComponent.text = (Mathf.Round(speed * 1000.0000f) / 1000.0000f) + "";
+        }
+        else
+        {
+            txtComponent.text = "";
+        }
         imgComponent.color = speedGradient.Evaluate(varyingSize.x / 100f);
     }
 }

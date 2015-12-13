@@ -12,7 +12,9 @@ public enum SoundType
     Turn,
     Finish,
     ObjectComesIntoView,
-    Collision
+    Collision,
+    Hurt,
+    Blop
 }
 
 public class SoundPlayer : MonoBehaviour {
@@ -22,6 +24,8 @@ public class SoundPlayer : MonoBehaviour {
     public List<AudioSource> finishSounds = new List<AudioSource>();
     public List<AudioSource> objectComesIntoViewSounds = new List<AudioSource>();
     public List<AudioSource> collisionSounds = new List<AudioSource>();
+    public List<AudioSource> hurtSounds = new List<AudioSource>();
+    public List<AudioSource> blopSounds = new List<AudioSource>();
 
     private AudioSource loopedSound;
 
@@ -72,6 +76,14 @@ public class SoundPlayer : MonoBehaviour {
             else if (soundType == SoundType.Collision)
             {
                 soundList = collisionSounds;
+            }
+            else if (soundType == SoundType.Hurt)
+            {
+                soundList = hurtSounds;
+            }
+            else if (soundType == SoundType.Blop)
+            {
+                soundList = blopSounds;
             }
 
             if (soundList.Count > 0)

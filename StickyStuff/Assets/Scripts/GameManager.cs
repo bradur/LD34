@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour {
     private Level nextLevel;
 
     [SerializeField]
+    private BackgroundZoom backgroundZoom;
+
+    [SerializeField]
     private bool TESTING = false;
 
     void Awake()
@@ -47,11 +50,7 @@ public class GameManager : MonoBehaviour {
             musicPlayer.StartPlaying();
             if (!TESTING)
             {
-                currentLevelPrefab = currentLevel;
-                currentLevel = Instantiate(currentLevel);
-                currentLevel.transform.parent = GameContainer.transform;
-                currentLevel.transform.localPosition = Vector3.zero;
-                nextLevel = currentLevel.GetNextLevel();
+                OpenLevel(currentLevel);
             }
             
         }
@@ -81,28 +80,31 @@ public class GameManager : MonoBehaviour {
             Debug.Log("The End");
         }
         else {
-            StopAllCoroutines();
-            character.GetComponent<CharacterMovement>().EmptySticky();
-            currentLevelPrefab = nextLevel;
-            currentLevel = Instantiate(nextLevel);
-            currentLevel.transform.parent = GameContainer.transform;
-            currentLevel.transform.localPosition = Vector3.zero;
-            
-            nextLevel = currentLevel.GetNextLevel();
+            backgroundZoom.StartZoom();
         }
+    }
+
+    private void OpenLevel(Level level){
+        StopAllCoroutines();
+        character.GetComponent<CharacterMovement>().EmptySticky();
+        currentLevelPrefab = level;
+        currentLevel = Instantiate(level);
+        currentLevel.transform.parent = GameContainer.transform;
+        currentLevel.transform.localPosition = Vector3.zero;
+        nextLevel = currentLevel.GetNextLevel();
+    }
+
+    public void BackgroundZoomFinished()
+    {
+        popupManager.ClearPool();
+        OpenLevel(nextLevel);
     }
 
     public void RestartLevel()
     {
-        StopCoroutine("WaitOrRetry");
         popupManager.ClearPool();
         currentLevel.Kill();
-        currentLevel = Instantiate(currentLevelPrefab);
-        character.GetComponent<CharacterMovement>().EmptySticky();
-        currentLevel.transform.parent = GameContainer.transform;
-        currentLevel.transform.localPosition = Vector3.zero;
-        
-        nextLevel = currentLevel.GetNextLevel();
+        OpenLevel(currentLevelPrefab);
     }
 
     public void UpdateSpeedBand(float speed)

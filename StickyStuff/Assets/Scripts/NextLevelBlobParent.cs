@@ -38,12 +38,13 @@ public class NextLevelBlobParent : MonoBehaviour {
 
     public void PlayAppearingSound()
     {
-        GameManager.instance.soundPlayer.PlaySound(SoundType.ObjectComesIntoView);
+        //
     }
 
     public void SaySomething()
     {
         nextLevelBlobSprite.SaySomething();
+        GameManager.instance.soundPlayer.PlaySound(SoundType.ObjectComesIntoView);
     }
 
     void Update()

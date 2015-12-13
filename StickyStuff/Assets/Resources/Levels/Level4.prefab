@@ -761,7 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevelBlob: {fileID: 11476526}
-  nextLevel: {fileID: 0}
+  nextLevel: {fileID: 11406836, guid: 4c2d885cb6d009a4cb74ebcb642c8d47, type: 2}
 --- !u!212 &21227264
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -978,7 +978,12 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: nextLevel
+      value: 
+      objectReference: {fileID: 11406836, guid: 4c2d885cb6d009a4cb74ebcb642c8d47,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 186192}
