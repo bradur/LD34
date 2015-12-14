@@ -270,7 +270,7 @@ public class GameManager : MonoBehaviour {
             {
                 waitForStartConfirmation = false;
                 popupManager.ClearPool();
-                #if UNITY_STANDALONE || UNITY_EDITOR
+                #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEB
                                 popupManager.ShowPopup("Left and right arrow keys to turn", new Vector3(0f, -2f, 0f), PopupType.Lingering);
                                 popupManager.ShowPopup("Esc to quit", new Vector3(0f, 2f, 0f), PopupType.Lingering);
                 #endif
