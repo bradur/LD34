@@ -26,6 +26,19 @@ public class CharacterMovement : MonoBehaviour {
     private bool leftButtonDown = false;
     private bool rightButtonDown = false;
 
+    private float originalDrag;
+    private float originalMass;
+    private float originalSpeed;
+    private ForceMode originalForceMode;
+
+    void Awake()
+    {
+        originalDrag = rigidBody.angularDrag;
+        originalMass = rigidBody.mass;
+        originalSpeed = speed;
+        originalForceMode = forceMode;
+    }
+
     public void ButtonDown(string button)
     {
         if (button == "left")
@@ -64,6 +77,22 @@ public class CharacterMovement : MonoBehaviour {
             rightButtonDown = false;
         }
         GameManager.instance.soundPlayer.StopLoopedSound();
+    }
+
+    public void ReleaseMaxSpeed()
+    {
+        /*rigidBody.angularDrag = 0f;
+        rigidBody.mass = 20f;*/
+        speed = 10f;
+        forceMode = ForceMode.Acceleration;
+    }
+
+    public void ResetMaxSpeed()
+    {
+        rigidBody.angularDrag = originalDrag;
+        rigidBody.mass = originalMass;
+        speed = originalSpeed;
+        forceMode = originalForceMode;
     }
 
     void Update () {

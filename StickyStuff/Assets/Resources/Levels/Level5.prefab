@@ -800,6 +800,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca6427e6f9ae7d47bd9da7226525d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceleration: 0
+  objectMoves: 0
+  objectTarget: {fileID: 0}
+  rigidBody: {fileID: 0}
 --- !u!114 &11406836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -813,7 +817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   nextLevelBlob: {fileID: 11440210}
-  nextLevel: {fileID: 0}
+  nextLevel: {fileID: 11479784, guid: f64f93ffeda53d748b6e26f50855a504, type: 2}
 --- !u!114 &11433288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1178,6 +1182,11 @@ Prefab:
       propertyPath: id
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: nextLevel
+      value: 
+      objectReference: {fileID: 11479784, guid: f64f93ffeda53d748b6e26f50855a504,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 182942}

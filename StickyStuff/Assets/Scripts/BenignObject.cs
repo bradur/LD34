@@ -81,11 +81,11 @@ public class BenignObject : MonoBehaviour {
             attached = true;
             if (collision.gameObject.GetComponent<BenignObject>() != null)
             {
-                objectLevel = collision.gameObject.GetComponent<BenignObject>().objectLevel;
+                objectLevel = collision.gameObject.GetComponent<BenignObject>().objectLevel + 1;
             }
             int objectLevelDisplay = (objectLevel + 1) * objectLevelInterval;
             int score = objectLevelDisplay + Mathf.FloorToInt(characterSpeed * (float)(objectLevelDisplay));
-            GameManager.instance.popupManager.ShowPopup(objectLevelDisplay + "+" + objectLevelDisplay + " <size=50>x</size> " + characterSpeed + " = " + score, transform.position);
+            GameManager.instance.popupManager.ShowPopup(objectLevelDisplay + "+" + objectLevelInterval + " <size=50>x</size> " + characterSpeed + " = " + score, transform.position);
             GameManager.instance.UpdateScore(score);
             GameManager.instance.soundPlayer.PlayLeveledSound(SoundType.Collision, objectLevel);
             CharacterMovement character = GameManager.instance.GetCharacter().GetComponent<CharacterMovement>();

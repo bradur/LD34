@@ -58,6 +58,11 @@ public class Popup : MonoBehaviour {
         {
             animator.SetTrigger("ShowStationary");
         }
+        else if (popupType == PopupType.Big)
+        {
+            txtComponent.fontSize = 150;
+            animator.SetTrigger("ShowStationary");
+        }
         
     }
 

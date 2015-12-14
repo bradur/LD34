@@ -25,10 +25,16 @@ public class RotationButton : MonoBehaviour {
     [SerializeField]
     private ButtonDirection direction;
 
+    [SerializeField]
+    private RectTransform androidPosition;
+
     private string directionString;
 
     void Start()
     {
+        #if UNITY_ANDROID
+            GetComponent<RectTransform>().position = androidPosition.position;
+        #endif
         colorUp = imgComponent.color;
         if (direction == ButtonDirection.Left)
         {

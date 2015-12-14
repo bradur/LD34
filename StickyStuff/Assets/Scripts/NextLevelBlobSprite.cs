@@ -37,6 +37,12 @@ public class NextLevelBlobSprite : MonoBehaviour {
             hasCollided = true;
             GameManager.instance.NextLevelBlobFound();
         }
+        else if (!hasCollided && collision.gameObject.tag == "Enemy")
+        {
+            GameManager.instance.soundPlayer.PlaySound(SoundType.Hurt);
+            GameManager.instance.popupManager.ShowPopup("Retry? Press R", Vector3.zero, PopupType.Stationary);
+            Destroy(transform.parent.gameObject);
+        }
     }
 
 }

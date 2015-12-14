@@ -10,7 +10,8 @@ using System.Collections.Generic;
 public enum PopupType {
     Short,
     Lingering,
-    Stationary
+    Stationary,
+    Big
 }
 
 public class PopupManager : MonoBehaviour {
@@ -21,9 +22,13 @@ public class PopupManager : MonoBehaviour {
     [SerializeField]
     private Dialog basicDialog;
 
+    [SerializeField]
+    [Range(10, 50)]
+    private int poolSize = 10;
+
     void Start()
     {
-        InitPopupPool(10, basicPopup);
+        InitPopupPool(poolSize, basicPopup);
     }
 
     public void ShowPopup(string message)
