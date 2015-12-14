@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
         popupManager.ShowPopup("bradur presents", new Vector3(-1f, 3f, 0f), PopupType.Stationary);
         popupManager.ShowPopup("Sticky Stuff", new Vector3(0f, 2f, 0f), PopupType.Big);
         popupManager.ShowPopup("A Ludum Dare project", new Vector3(0f, 1.5f, 0f), PopupType.Stationary);
-        #if UNITY_STANDALONE || UNITY_EDITOR
+        #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEB
             popupManager.ShowPopup("Press any key to start", new Vector3(0f, -1.5f, 0f), PopupType.Stationary);
         #elif UNITY_ANDROID
             popupManager.ShowPopup("Tap to start", new Vector3(0f, -1.5f, 0f), PopupType.Stationary);
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour {
         if (nextLevel == null)
         {
             // UI show stuff heer
-            #if UNITY_STANDALONE || UNITY_EDITOR
+            #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEB
                 popupManager.ShowPopup("THE END\nThanks for playing!\nPlay Again (Y) Quit (N)", Vector3.zero, PopupType.Stationary);
             #elif UNITY_ANDROID
                 popupManager.ShowPopup("THE END! Thanks for playing!\nTap here to play again", Vector3.zero, PopupType.Stationary);
@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour {
     IEnumerator WaitOrRetry()
     {
         yield return new WaitForSeconds(5);
-        #if UNITY_STANDALONE || UNITY_EDITOR
+        #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEB
             popupManager.ShowPopup("Retry? Press R", Vector3.zero, PopupType.Stationary);
         #elif UNITY_ANDROID
             popupManager.ShowPopup("Retry? Tap here", Vector3.zero, PopupType.Stationary);
@@ -230,7 +230,7 @@ public class GameManager : MonoBehaviour {
         {
             RestartLevel();
         }
-#if UNITY_STANDALONE || UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEB
         if (Input.GetKeyDown(KeyCode.Escape) && !waitingForExitConfirmation && !waitingForPlayAgainConfirmation)
         {
             popupManager.ShowPopup("Really want to quit?\n Yes(Y) No(N)", Vector3.zero, PopupType.Stationary);
@@ -270,9 +270,11 @@ public class GameManager : MonoBehaviour {
             {
                 waitForStartConfirmation = false;
                 popupManager.ClearPool();
-                #if UNITY_STANDALONE || UNITY_EDITOR || UNITY_WEB
-                                popupManager.ShowPopup("Left and right arrow keys to turn", new Vector3(0f, -2f, 0f), PopupType.Lingering);
-                                popupManager.ShowPopup("Esc to quit", new Vector3(0f, 2f, 0f), PopupType.Lingering);
+                #if UNITY_STANDALONE || UNITY_EDITOR
+                    popupManager.ShowPopup("Left and right arrow keys to turn", new Vector3(0f, -2f, 0f), PopupType.Lingering);
+                    popupManager.ShowPopup("Esc to quit", new Vector3(0f, 2f, 0f), PopupType.Lingering);
+                #elif UNITY_WEB
+                    popupManager.ShowPopup("Left and right arrow keys to turn", new Vector3(0f, -2f, 0f), PopupType.Lingering);
                 #endif
                 Time.timeScale = 1f;
             }
